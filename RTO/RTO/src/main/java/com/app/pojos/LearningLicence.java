@@ -2,10 +2,15 @@ package com.app.pojos;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -16,7 +21,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "learning_tbl")
-public class LearningLicence extends BaseEntity {
+public class LearningLicence {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int applicantId;
+	
 	@Column(length = 20)
 	@NotBlank(message = "Name is required")
 	@Length(min = 3, max = 15, message = "Invalid name length")
@@ -89,14 +99,17 @@ public class LearningLicence extends BaseEntity {
 	@NotBlank(message = "Street is required")
 	@Length(min = 1, max = 50, message = "Invalid Street ")
 	private String street;
-
+	
+	@OneToOne(mappedBy = "learningLicense",cascade = CascadeType.ALL, orphanRemoval = true)
+	private Appointment appointment;
+	
 	public LearningLicence() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public LearningLicence(String firstName, String lastName, String email, String aadharNo, String mobileNo,
 			LocalDate dob, Gender gender, BloodGroup bloodGroup, String identificationMark, String state,
-			String district, String village, String landmark, String pincode, String street) {
+			String district, String village, String landmark, String pincode, String street, Appointment appointment) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -113,6 +126,23 @@ public class LearningLicence extends BaseEntity {
 		this.landmark = landmark;
 		this.pincode = pincode;
 		this.street = street;
+		this.appointment=appointment;
+	}
+
+	public Appointment getAppointment() {
+		return appointment;
+	}
+
+	public void setAppointment(Appointment appointment) {
+		this.appointment = appointment;
+	}
+
+	public int getApplicantId() {
+		return applicantId;
+	}
+
+	public void setApplicantId(int applicantId) {
+		this.applicantId = applicantId;
 	}
 
 	public String getFirstName() {

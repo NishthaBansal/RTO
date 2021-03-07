@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Learning License Form</title>
 </head>
 <body>
 
@@ -101,9 +101,9 @@
 				<td><form:input path="street" /></td>
 				<td><form:errors path="street" /></td>
 			</tr>
-
+			
 			<tr>
-				<td><input type="submit" value="Submit" /></td>
+				<td><input type="submit" value="Book Your Test Slot" /></td>
 			</tr>
 		</table>
 	</form:form>

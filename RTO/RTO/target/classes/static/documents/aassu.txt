@@ -1,0 +1,89 @@
+1. Write a shell script to get the current date,time, username and current working directory.
+[nishbans@localhost ~]$ vim one.sh
+
+#!/bin/bash
+date="$(date)"
+echo "CURRENT DATE AND TIME : $date"
+user="$USER"
+echo "CURRENT USER : $user"
+directory="$(pwd)"
+echo "CURRENT WORKING DIRECTORY : $directory"
+
+[nishbans@localhost ~]$ chmod +x one.sh
+[nishbans@localhost ~]$ ./one.sh
+
+CURRENT DATE : Wed Oct 21 08:26:16 IST 2020
+CURRENT USER : nishbans
+CURRENT WORKING DIRECTORY : /home/nishbans
+--------------------------------------------------------------
+2. File content is given,
+Find the unique words in a file and also count the occurence of each of these word.
+
+[nishbans@localhost ~]$ vim two.h
+tiger bear
+elephant tiger bear
+bear
+[nishbans@localhost ~]$ vim animals.h
+tiger
+elephant
+bear
+[nishbans@localhost ~]$ vim two.sh
+
+#!/bin/bash
+while read line
+do
+occur="$(grep -o -i "$line" two.h | wc -l)"
+if [ $occur == 1 ]
+then    echo "$line is a UNIQUE WORD"
+else
+ echo "OCCURENCES OF $line = $occur"
+fi
+done < /home/nishbans/animals.h
+
+[nishbans@localhost ~]$ chmod +x two.sh
+[nishbans@localhost ~]$ ./two.sh
+OCCURENCES OF tiger = 2
+elephant is a UNIQUE WORD
+OCCURENCES OF bear = 3
+--------------------------------------------------------------
+3. Command to know how long the system has been running.
+[nishbans@localhost ~]$ uptime
+ 08:41:34 up 43 min,  2 users,  load average: 0.03, 0.04, 0.09
+---------------------------------------------------------------
+4. List all the shells in the system and display which one we are using
+[nishbans@localhost ~]$ cat /etc/shells
+/bin/sh
+/bin/bash
+/usr/bin/sh
+/usr/bin/bash
+/bin/tcsh
+/bin/csh
+[nishbans@localhost ~]$ echo $SHELL
+/bin/bash
+----------------------------------------------------------------
+5. What is meant by ${#variable}?
+Ans : It gives the length of the variable.
+[nishbans@localhost ~]$ a="nishtha"
+[nishbans@localhost ~]$ echo "${#a}"
+7
+-----------------------------------------------------------------
+6. Write a script that asks for an input word from you and check the following conditions for your input.
+It should have :
+Length- minimum of 8 characters
+Contain both alphabet and number
+Include both the small and capital case letters
+------------------------------------------------------------------
+[root@localhost ~]# pidof firefox
+6733 6665 6661 6625 6549
+[root@localhost ~]# renice -20 -p 6733
+6733 (process ID) old priority 0, new priority -20
+------------------------------------------------------------------
+[root@localhost ~]# pidof firefox
+6733 6665 6661 6625 6549
+[root@localhost ~]# renice 19 -p 6733
+6733 (process ID) old priority -20, new priority 19
+-----------------------------------------------------------------
+[root@localhost ~]# pidof firefox
+6733 6665 6661 6625 6549
+[root@localhost ~]# renice 10 -p 6733
+6733 (process ID) old priority 0, new priority 10

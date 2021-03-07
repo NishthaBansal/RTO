@@ -17,17 +17,17 @@ public class User extends BaseEntity {
 	@Column(length = 20)
 	@NotBlank(message = "Name is required")
 	@Length(min = 3, max = 15, message = "Invalid name length")
-	private String firstName = "abc";
+	private String firstName;
 
 	@Column(length = 20)
 	@NotBlank(message = "Name is required")
 	@Length(min = 3, max = 15, message = "Invalid name length")
-	private String lastName = "xyz";
+	private String lastName;
 
 	@Column(length = 20, unique = true)
 	@NotBlank(message = "Email is required")
 	@Email(message = "Invalid Email Format ")
-	private String email = "abc@gmail.com";
+	private String email;
 
 	@Column(length = 20, nullable = false)
 	@Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})", message = "Blank or Invalid password")
